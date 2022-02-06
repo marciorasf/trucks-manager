@@ -1,4 +1,4 @@
-from sample import main
+from trucks_manager import main
 
 
 def test_main() -> None:
