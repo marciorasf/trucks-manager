@@ -1,0 +1,57 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: pretty-format-json
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: black
+        name: Format code with black
+        entry: black
+        pass_filenames: true
+        types: [python]
+        language: system
+
+      - id: flake8
+        name: Check style with flake8
+        entry: flake8
+        pass_filenames: true
+        types: [python]
+        language: system
+
+      - id: mypy
+        name: Typecheck with mypy
+        entry: mypy .
+        pass_filenames: false
+        types: [python]
+        language: system
+
+      - id: pytest
+        name: Run tests with pytest
+        entry: pytest --random-order --cov=sample --cov-report=term --cov-fail-under=90
+        pass_filenames: false
+        language: system
+
+      - id: vulture
+        name: Check dead code with vulture
+        entry: vulture .
+        pass_filenames: false
+        types: [python]
+        stages: [push]
+        language: system
+
+      - id: bandit
+        name: Check security flaws with bandit
+        entry: bandit
+        pass_filenames: true
+        types: [python]
+        exclude: tests
+        stages: [push]
+        language: system
