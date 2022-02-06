@@ -10,4 +10,4 @@ class TruckRepository(Protocol):
 
 class TruckRepositoryInMemory:
     def add(self, truck: Truck) -> TruckId:
-        return truck.unique_id
+        return truck.identifier

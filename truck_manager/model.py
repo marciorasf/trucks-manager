@@ -7,7 +7,7 @@ TruckId = NewType("TruckId", UUID4)
 
 
 class Truck(BaseModel):
-    unique_id: TruckId = TruckId(uuid4())
+    identifier: TruckId = TruckId(uuid4())
     plate: str = Field(..., min_length=1, max_length=7)
     model_name: str = Field(..., min_length=1, max_length=20)
     tank_capacity: PositiveInt
