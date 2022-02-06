@@ -33,10 +33,18 @@ repos:
         types: [python]
         language: system
 
-      - id: pytest
+      - id: pytest-commit
+        name: Run tests with pytest
+        entry: poetry run pytest --random-order --cov=sample --cov-report=term
+        pass_filenames: false
+        stages: [commit]
+        language: system
+
+      - id: pytest-push
         name: Run tests with pytest
         entry: poetry run pytest --random-order --cov=sample --cov-report=term --cov-fail-under=90
         pass_filenames: false
+        stages: [push]
         language: system
 
       - id: vulture
