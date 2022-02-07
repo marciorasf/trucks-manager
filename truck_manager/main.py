@@ -27,7 +27,7 @@ def index() -> Set[Truck]:
 
 
 @app.get("/trucks/{truck_id}")
-def retrieve_truck(truck_id: str) -> Set[Truck]:
+def retrieve_truck() -> Set[Truck]:
     raise NotImplementedError
 
 
@@ -37,10 +37,10 @@ def create_truck(truck: Truck) -> TruckId:
 
 
 @app.put("/trucks/{truck_id}")
-def update_truck(truck_id: str, truck: Truck) -> None:
+def update_truck() -> None:
     raise NotImplementedError
 
 
 @app.delete("/trucks/{truck_id}")
-def delete_truck(truck_id: str) -> None:
+def delete_truck() -> None:
     raise NotImplementedError
