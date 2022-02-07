@@ -49,7 +49,7 @@ def test_delete_non_existent_truck_should_raise() -> None:
         repository.delete(parse_truck_id("1"))
 
 
-def test_persist() -> None:
+def test_persist_repo_with_truck() -> None:
     repository = TruckRepositoryInMemory()
     truck = Truck(
         plate="AAA1111",
@@ -69,7 +69,16 @@ def test_persist() -> None:
     os.remove("tests/persist.json")
 
 
-def test_load() -> None:
+def test_persist_empty_repo() -> None:
+    repository = TruckRepositoryInMemory()
+    repository.persist("tests/persist.json")
+
+    assert os.path.exists("tests/persist.json")
+
+    os.remove("tests/persist.json")
+
+
+def test_load_existent_json() -> None:
     repository = TruckRepositoryInMemory()
     truck = Truck(
         plate="AAA1111",
