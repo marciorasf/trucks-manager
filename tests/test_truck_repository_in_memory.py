@@ -7,14 +7,8 @@ from truck_manager.model import Truck, parse_truck_id
 from truck_manager.truck_repository import TruckRepositoryInMemory
 
 
-@pytest.fixture
-def repository() -> TruckRepositoryInMemory:
-    return TruckRepositoryInMemory()
-
-
-def test_add_already_existent_truck_should_raise(
-    repository: TruckRepositoryInMemory,
-) -> None:
+def test_add_already_existent_truck_should_raise() -> None:
+    repository = TruckRepositoryInMemory()
     truck = Truck(
         plate="AAA1111",
         model_name="civic",
@@ -22,20 +16,21 @@ def test_add_already_existent_truck_should_raise(
         status="OK",
     )
     repository.add(truck)
+
     with pytest.raises(KeyError):
         repository.add(truck)
 
 
-def test_retrieve_by_id_non_existent_truck_should_raise(
-    repository: TruckRepositoryInMemory,
-) -> None:
+def test_retrieve_by_id_non_existent_truck_should_raise() -> None:
+    repository = TruckRepositoryInMemory()
+
     with pytest.raises(KeyError):
         repository.retrieve_by_id(parse_truck_id("1"))
 
 
-def test_update_non_existent_truck_should_raise(
-    repository: TruckRepositoryInMemory,
-) -> None:
+def test_update_non_existent_truck_should_raise() -> None:
+    repository = TruckRepositoryInMemory()
+
     with pytest.raises(KeyError):
         repository.update(
             Truck(
@@ -47,16 +42,15 @@ def test_update_non_existent_truck_should_raise(
         )
 
 
-def test_delete_non_existent_truck_should_raise(
-    repository: TruckRepositoryInMemory,
-) -> None:
+def test_delete_non_existent_truck_should_raise() -> None:
+    repository = TruckRepositoryInMemory()
+
     with pytest.raises(KeyError):
         repository.delete(parse_truck_id("1"))
 
 
-def test_persist(
-    repository: TruckRepositoryInMemory,
-) -> None:
+def test_persist() -> None:
+    repository = TruckRepositoryInMemory()
     truck = Truck(
         plate="AAA1111",
         model_name="civic",
