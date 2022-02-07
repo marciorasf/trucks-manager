@@ -58,7 +58,7 @@ class TruckRepositoryInMemory:
     def persist(self, filename: str) -> None:
         with open(filename, "w") as fp:
             json.dump(
-                {str(t.identifier): t.json() for t in self._trucks.values()},
+                {t.identifier: t.json() for t in self._trucks.values()},
                 fp,
             )
 
