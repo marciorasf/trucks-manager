@@ -69,7 +69,7 @@ def test_persist_repo_with_truck() -> None:
     os.remove("tests/persist.json")
 
 
-def test_persist_empty_repo() -> None:
+def test_persist_empty_repo_should_not_raise() -> None:
     repository = TruckRepositoryInMemory()
     repository.persist("tests/persist.json")
 
@@ -94,3 +94,18 @@ def test_load_existent_json() -> None:
     assert truck in other_repo.retrieve_all()
 
     os.remove("tests/load.json")
+
+
+def test_load_empty_json_should_not_raise() -> None:
+    repository = TruckRepositoryInMemory()
+    repository.persist("tests/load.json")
+
+    other_repo = TruckRepositoryInMemory()
+    other_repo.load("tests/load.json")
+
+    os.remove("tests/load.json")
+
+
+def test_load_non_existent_json_should_not_raise() -> None:
+    other_repo = TruckRepositoryInMemory()
+    other_repo.load("tests/load.json")

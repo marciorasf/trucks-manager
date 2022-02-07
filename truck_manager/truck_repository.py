@@ -1,6 +1,8 @@
 import json
+import os
 from typing import Dict, Protocol, Set
 
+from truck_manager.logging import logger
 from truck_manager.model import Truck, TruckId
 
 
@@ -62,6 +64,10 @@ class TruckRepositoryInMemory:
             )
 
     def load(self, filename: str) -> None:
+        if not os.path.exists(filename):
+            logger.info("Could not load from file because it does not exist")
+            return
+
         with open(filename, "r") as fp:
             content = json.load(fp)
             self._trucks.update(
