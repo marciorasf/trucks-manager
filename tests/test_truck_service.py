@@ -72,3 +72,31 @@ def test_retrieve_by_id_should_return_truck(service: TruckService) -> None:
 def test_retrieve_by_id_non_existent_truck_should_raise(service: TruckService) -> None:
     with pytest.raises(KeyError):
         service.retrieve_by_id(parse_truck_id(uuid4()))
+
+
+def test_update_should_overwrite_attribute(service: TruckService) -> None:
+    truck = Truck(
+        plate="AAA1111",
+        model_name="civic",
+        tank_capacity=100,
+        status="OK",
+    )
+    service.add(truck)
+
+    updated_truck = truck.copy(update={"status": "BROKEN"})
+    service.update(updated_truck)
+
+    final_truck = service.retrieve_by_id(truck.identifier)
+    assert final_truck.status == "BROKEN"
+
+
+def test_update_non_existent_truck_should_raise(service: TruckService) -> None:
+    with pytest.raises(KeyError):
+        service.update(
+            Truck(
+                plate="AAA1111",
+                model_name="civic",
+                tank_capacity=100,
+                status="OK",
+            )
+        )

@@ -16,3 +16,6 @@ class TruckService:
 
     def retrieve_by_id(self, identifier: TruckId) -> Truck:
         return self._repository.retrieve_by_id(identifier)
+
+    def update(self, truck: Truck) -> TruckId:
+        return self._repository.update(truck)

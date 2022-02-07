@@ -13,6 +13,9 @@ class TruckRepository(Protocol):
     def retrieve_by_id(self, identifier: TruckId) -> Truck:
         pass
 
+    def update(self, truck: Truck) -> TruckId:
+        pass
+
 
 class TruckRepositoryInMemory:
     def __init__(self) -> None:
@@ -20,7 +23,7 @@ class TruckRepositoryInMemory:
 
     def add(self, truck: Truck) -> TruckId:
         if truck.identifier in self._trucks:
-            raise KeyError("Truck already on repository")
+            raise KeyError("Truck already existent")
 
         self._trucks[truck.identifier] = truck
         return truck.identifier
@@ -33,3 +36,10 @@ class TruckRepositoryInMemory:
             raise KeyError("Truck not found")
 
         return self._trucks[identifier]
+
+    def update(self, truck: Truck) -> TruckId:
+        if truck.identifier not in self._trucks:
+            raise KeyError("Truck not found")
+
+        self._trucks[truck.identifier] = truck
+        return truck.identifier
