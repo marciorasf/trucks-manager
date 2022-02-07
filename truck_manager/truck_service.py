@@ -13,3 +13,6 @@ class TruckService:
 
     def retrieve_all(self) -> Set[Truck]:
         return self._repository.retrieve_all()
+
+    def retrieve_by_id(self, identifier: TruckId) -> Truck:
+        return self._repository.retrieve_by_id(identifier)

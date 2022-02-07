@@ -10,6 +10,9 @@ class TruckRepository(Protocol):
     def retrieve_all(self) -> Set[Truck]:
         pass
 
+    def retrieve_by_id(self, identifier: TruckId) -> Truck:
+        pass
+
 
 class TruckRepositoryInMemory:
     def __init__(self) -> None:
@@ -21,3 +24,9 @@ class TruckRepositoryInMemory:
 
     def retrieve_all(self) -> Set[Truck]:
         return set(self._trucks.values())
+
+    def retrieve_by_id(self, identifier: TruckId) -> Truck:
+        if identifier not in self._trucks:
+            raise KeyError("Truck not found")
+
+        return self._trucks[identifier]

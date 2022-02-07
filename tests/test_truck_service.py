@@ -41,3 +41,22 @@ def test_retrieve_all_should_retrieve_trucks(service: TruckService) -> None:
     result = service.retrieve_all()
 
     assert truck in result
+
+
+def test_retrieve_by_id_should_return_truck(service: TruckService) -> None:
+    truck = Truck(
+        plate="AAA1111",
+        model_name="civic",
+        tank_capacity=100,
+        status="OK",
+    )
+    service.add(truck)
+
+    result = service.retrieve_by_id(truck.identifier)
+
+    assert result == truck
+
+
+def test_retrieve_by_id_non_existent_truck_should_raise(service: TruckService) -> None:
+    with pytest.raises(KeyError):
+        service.retrieve_by_id(parse_truck_id(uuid4()))
