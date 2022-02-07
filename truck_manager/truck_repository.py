@@ -7,7 +7,7 @@ class TruckRepository(Protocol):
     def add(self, truck: Truck) -> TruckId:
         pass
 
-    def retrieve_all(self) -> Set[TruckId]:
+    def retrieve_all(self) -> Set[Truck]:
         pass
 
 
@@ -19,5 +19,5 @@ class TruckRepositoryInMemory:
         self._trucks[truck.identifier] = truck
         return truck.identifier
 
-    def retrieve_all(self) -> Set[TruckId]:
-        return set(self._trucks.keys())
+    def retrieve_all(self) -> Set[Truck]:
+        return set(self._trucks.values())

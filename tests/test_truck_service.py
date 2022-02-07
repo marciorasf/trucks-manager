@@ -29,16 +29,15 @@ def test_add_should_return_identifier(service: TruckService) -> None:
     assert result == expected_id
 
 
-def test_retrieve_all_should_retrieve_truck_ids(service: TruckService) -> None:
-    expected_id = service.add(
-        Truck(
-            plate="AAA1111",
-            model_name="civic",
-            tank_capacity=100,
-            status="OK",
-        )
+def test_retrieve_all_should_retrieve_trucks(service: TruckService) -> None:
+    truck = Truck(
+        plate="AAA1111",
+        model_name="civic",
+        tank_capacity=100,
+        status="OK",
     )
+    service.add(truck)
 
     result = service.retrieve_all()
 
-    assert expected_id in result
+    assert truck in result

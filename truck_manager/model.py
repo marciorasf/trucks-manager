@@ -20,3 +20,4 @@ class Truck(BaseModel):
 
     class Config:
         allow_mutation = False
+        frozen = True
