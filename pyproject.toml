@@ -46,6 +46,13 @@ addopts = [
   "--cov-report=term"
 ]
 
+[tool.coverage.report]
+exclude_lines = [
+    "raise NotImplementedError",
+    "pass"
+]
+skip_empty = true
+
 [tool.isort]
 profile = "black"
 line_length = 88

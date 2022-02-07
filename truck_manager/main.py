@@ -23,24 +23,24 @@ def shutdown() -> None:
 
 @app.get("/trucks")
 def index() -> Set[Truck]:
-    raise Exception("Not implemented yet")
+    raise NotImplementedError
 
 
 @app.get("/trucks/{truck_id}")
 def retrieve_truck(truck_id: str) -> Set[Truck]:
-    raise Exception("Not implemented yet")
+    raise NotImplementedError
 
 
 @app.post("/trucks")
 def create_truck(truck: Truck) -> TruckId:
-    raise Exception("Not implemented yet")
+    raise NotImplementedError
 
 
 @app.put("/trucks/{truck_id}")
 def update_truck(truck_id: str, truck: Truck) -> None:
-    raise Exception("Not implemented yet")
+    raise NotImplementedError
 
 
 @app.delete("/trucks/{truck_id}")
 def delete_truck(truck_id: str) -> None:
-    raise Exception("Not implemented yet")
+    raise NotImplementedError
