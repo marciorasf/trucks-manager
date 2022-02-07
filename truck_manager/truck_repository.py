@@ -16,7 +16,7 @@ class TruckRepository(Protocol):
     def retrieve_by_id(self, identifier: TruckId) -> Truck:
         pass
 
-    def update(self, truck: Truck) -> TruckId:
+    def update(self, truck: Truck) -> None:
         pass
 
     def delete(self, identifier: TruckId) -> None:
@@ -43,12 +43,11 @@ class TruckRepositoryInMemory:
 
         return self._trucks[identifier]
 
-    def update(self, truck: Truck) -> TruckId:
+    def update(self, truck: Truck) -> None:
         if truck.identifier not in self._trucks:
             raise KeyError("Truck not found")
 
         self._trucks[truck.identifier] = truck
-        return truck.identifier
 
     def delete(self, identifier: TruckId) -> None:
         if identifier not in self._trucks:
