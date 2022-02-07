@@ -23,7 +23,7 @@ def shutdown() -> None:
 
 @app.get("/trucks")
 def index() -> Set[Truck]:
-    raise NotImplementedError
+    return repo.retrieve_all()
 
 
 @app.get("/trucks/{truck_id}")
@@ -33,7 +33,7 @@ def retrieve_truck(truck_id: str) -> Set[Truck]:
 
 @app.post("/trucks")
 def create_truck(truck: Truck) -> TruckId:
-    raise NotImplementedError
+    return repo.add(truck)
 
 
 @app.put("/trucks/{truck_id}")
