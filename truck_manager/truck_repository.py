@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Iterator, Protocol, Set
+from typing import Dict, Protocol, Set
 
 from truck_manager.model import Truck, TruckId
 
@@ -67,12 +67,3 @@ class TruckRepositoryInMemory:
             self._trucks.update(
                 {key: Truck(**json.loads(value)) for key, value in content.items()}
             )
-
-
-def factory_in_memory_truck_repo(filename: str) -> Iterator[TruckRepositoryInMemory]:
-    try:
-        repo = TruckRepositoryInMemory()
-        repo.load(filename)
-        yield repo
-    finally:
-        repo.persist(filename)
