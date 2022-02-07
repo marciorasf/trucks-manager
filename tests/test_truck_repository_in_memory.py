@@ -67,3 +67,19 @@ def test_persist() -> None:
         assert truck.json() == content[truck.identifier]
 
     os.remove("tests/persist.json")
+
+
+def test_load() -> None:
+    repository = TruckRepositoryInMemory()
+    truck = Truck(
+        plate="AAA1111",
+        model_name="civic",
+        tank_capacity=100,
+        status="OK",
+    )
+    repository.add(truck)
+    repository.persist("tests/load.json")
+
+    other_repo = TruckRepositoryInMemory()
+    other_repo.load("tests/load.json")
+    assert truck in other_repo.retrieve_all()

@@ -60,3 +60,10 @@ class TruckRepositoryInMemory:
                 {str(t.identifier): t.json() for t in self._trucks.values()},
                 fp,
             )
+
+    def load(self, filename: str) -> None:
+        with open(filename, "r") as fp:
+            content = json.load(fp)
+            self._trucks.update(
+                {key: Truck(**json.loads(value)) for key, value in content.items()}
+            )
