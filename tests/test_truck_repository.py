@@ -1,12 +1,22 @@
+from typing import Callable
+
 import pytest
 
 from truck_manager.model import Truck, parse_truck_id
 from truck_manager.truck_repository import TruckRepository, TruckRepositoryInMemory
 
 
-@pytest.fixture
-def repository() -> TruckRepository:
+class FixtureRequest:
+    param: Callable[..., TruckRepository]
+
+
+def in_memory_factory() -> TruckRepositoryInMemory:
     return TruckRepositoryInMemory()
+
+
+@pytest.fixture(params=[in_memory_factory])
+def repository(request: FixtureRequest) -> TruckRepository:
+    return request.param()
 
 
 def test_add_should_return_identifier(repository: TruckRepository) -> None:
