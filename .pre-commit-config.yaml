@@ -56,7 +56,7 @@ repos:
 
       - id: vulture
         name: Check dead code with vulture
-        entry: poetry run vulture truck_manager
+        entry: poetry run vulture truck_manager --min-confidence 70
         pass_filenames: false
         exclude: .venv
         types: [python]
