@@ -13,7 +13,7 @@ def service() -> TruckService:
     return TruckService(repository)
 
 
-def test_add_truck(service: TruckService) -> None:
+def test_add_should_return_identifier(service: TruckService) -> None:
     expected_id = parse_truck_id(uuid4())
 
     result = service.add(
@@ -27,3 +27,18 @@ def test_add_truck(service: TruckService) -> None:
     )
 
     assert result == expected_id
+
+
+def test_retrieve_all_should_retrieve_truck_ids(service: TruckService) -> None:
+    expected_id = service.add(
+        Truck(
+            plate="AAA1111",
+            model_name="civic",
+            tank_capacity=100,
+            status="OK",
+        )
+    )
+
+    result = service.retrieve_all()
+
+    assert expected_id in result
