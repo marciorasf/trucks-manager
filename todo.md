@@ -7,3 +7,5 @@
 [] Implement TruckRepository using a database with SQLAlchemy
 [] Add README
 [] Explore log formatters
+[] Explore property-based testing
+[] Explore mutation testing
