@@ -29,6 +29,18 @@ def test_add_should_return_identifier(service: TruckService) -> None:
     assert result == expected_id
 
 
+def test_add_already_existent_truck_should_raise(service: TruckService) -> None:
+    truck = Truck(
+        plate="AAA1111",
+        model_name="civic",
+        tank_capacity=100,
+        status="OK",
+    )
+    service.add(truck)
+    with pytest.raises(KeyError):
+        service.add(truck)
+
+
 def test_retrieve_all_should_retrieve_trucks(service: TruckService) -> None:
     truck = Truck(
         plate="AAA1111",

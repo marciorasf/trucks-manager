@@ -19,6 +19,9 @@ class TruckRepositoryInMemory:
         self._trucks: Dict[TruckId, Truck] = {}
 
     def add(self, truck: Truck) -> TruckId:
+        if truck.identifier in self._trucks:
+            raise KeyError("Truck already on repository")
+
         self._trucks[truck.identifier] = truck
         return truck.identifier
 
