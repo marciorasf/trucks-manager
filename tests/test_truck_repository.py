@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 import pytest
 
 from truck_manager.model import Truck, parse_truck_id
@@ -12,11 +10,9 @@ def repository() -> TruckRepository:
 
 
 def test_add_should_return_identifier(repository: TruckRepository) -> None:
-    expected_id = parse_truck_id(uuid4())
-
     result = repository.add(
         Truck(
-            identifier=expected_id,
+            identifier=parse_truck_id("1"),
             plate="AAA1111",
             model_name="civic",
             tank_capacity=100,
@@ -24,7 +20,7 @@ def test_add_should_return_identifier(repository: TruckRepository) -> None:
         )
     )
 
-    assert result == expected_id
+    assert result == "1"
 
 
 def test_retrieve_all_should_retrieve_trucks(repository: TruckRepository) -> None:

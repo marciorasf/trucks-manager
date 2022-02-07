@@ -1,6 +1,5 @@
 import json
 import os
-from uuid import uuid4
 
 import pytest
 
@@ -31,7 +30,7 @@ def test_retrieve_by_id_non_existent_truck_should_raise(
     repository: TruckRepositoryInMemory,
 ) -> None:
     with pytest.raises(KeyError):
-        repository.retrieve_by_id(parse_truck_id(uuid4()))
+        repository.retrieve_by_id(parse_truck_id("1"))
 
 
 def test_update_non_existent_truck_should_raise(
@@ -52,7 +51,7 @@ def test_delete_non_existent_truck_should_raise(
     repository: TruckRepositoryInMemory,
 ) -> None:
     with pytest.raises(KeyError):
-        repository.delete(parse_truck_id(uuid4()))
+        repository.delete(parse_truck_id("1"))
 
 
 def test_persist(
@@ -70,7 +69,7 @@ def test_persist(
 
     with open("tests/persist.json", "r") as fp:
         content = json.load(fp)
-        assert str(truck.identifier) in content
-        assert truck.json() == content[str(truck.identifier)]
+        assert truck.identifier in content
+        assert truck.json() == content[truck.identifier]
 
     os.remove("tests/persist.json")
