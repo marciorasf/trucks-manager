@@ -43,3 +43,7 @@ addopts = [
   "--cov=truck_manager",
   "--cov-report=term"
 ]
+
+[tool.isort]
+profile = "black"
+line_length = 88
