@@ -83,3 +83,5 @@ def test_load() -> None:
     other_repo = TruckRepositoryInMemory()
     other_repo.load("tests/load.json")
     assert truck in other_repo.retrieve_all()
+
+    os.remove("tests/load.json")
