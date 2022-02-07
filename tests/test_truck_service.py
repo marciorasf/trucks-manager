@@ -100,3 +100,22 @@ def test_update_non_existent_truck_should_raise(service: TruckService) -> None:
                 status="OK",
             )
         )
+
+
+def test_delete_should_delete_truck_from_repository(service: TruckService) -> None:
+    truck = Truck(
+        plate="AAA1111",
+        model_name="civic",
+        tank_capacity=100,
+        status="OK",
+    )
+    service.add(truck)
+
+    service.delete(truck.identifier)
+
+    assert truck not in service.retrieve_all()
+
+
+def test_delete_non_existent_truck_should_raise(service: TruckService) -> None:
+    with pytest.raises(KeyError):
+        service.delete(parse_truck_id(uuid4()))

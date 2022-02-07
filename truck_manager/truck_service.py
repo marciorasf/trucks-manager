@@ -19,3 +19,6 @@ class TruckService:
 
     def update(self, truck: Truck) -> TruckId:
         return self._repository.update(truck)
+
+    def delete(self, identifier: TruckId) -> None:
+        return self._repository.delete(identifier)
