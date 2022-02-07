@@ -6,6 +6,14 @@ from truck_manager.logging import logger
 from truck_manager.model import Truck, TruckId
 
 
+class TruckAlreadyExists(Exception):
+    pass
+
+
+class TruckNotFound(Exception):
+    pass
+
+
 class TruckRepository(Protocol):
     def add(self, truck: Truck) -> TruckId:
         pass
@@ -29,7 +37,7 @@ class TruckRepositoryInMemory:
 
     def add(self, truck: Truck) -> TruckId:
         if truck.identifier in self._trucks:
-            raise KeyError("Truck already existent")
+            raise TruckAlreadyExists()
 
         self._trucks[truck.identifier] = truck
         return truck.identifier
@@ -39,19 +47,19 @@ class TruckRepositoryInMemory:
 
     def retrieve_by_id(self, identifier: TruckId) -> Truck:
         if identifier not in self._trucks:
-            raise KeyError("Truck not found")
+            raise TruckNotFound()
 
         return self._trucks[identifier]
 
     def update(self, truck: Truck) -> None:
         if truck.identifier not in self._trucks:
-            raise KeyError("Truck not found")
+            raise TruckNotFound()
 
         self._trucks[truck.identifier] = truck
 
     def delete(self, identifier: TruckId) -> None:
         if identifier not in self._trucks:
-            raise KeyError("Truck not found")
+            raise TruckNotFound()
 
         del self._trucks[identifier]
 
