@@ -1,7 +1,3 @@
-import logging
+import structlog
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s"
-)
-
-logger = logging.getLogger("truck_manager")
+logger: structlog.stdlib.BoundLogger = structlog.get_logger("truck_manager")
