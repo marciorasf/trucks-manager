@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  truck_manager:
+    build: .
+    ports:
+      - 8000:8000
