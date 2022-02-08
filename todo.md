@@ -1,7 +1,6 @@
 # TODO
 
 [] Add Settings module
-[] Build image on CI Pipeline
 [] Explore log formatters
 
 [] Refactor service and repository
