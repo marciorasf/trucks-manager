@@ -6,7 +6,7 @@ FROM base as builder
 RUN pip install poetry
 COPY poetry.lock pyproject.toml /app/
 RUN poetry install --no-dev --no-interaction --no-ansi && poetry export -f requirements.txt -o requirements.txt --with-credentials
-COPY . .
+COPY truck_manager truck_manager
 RUN poetry build
 
 FROM base as final
