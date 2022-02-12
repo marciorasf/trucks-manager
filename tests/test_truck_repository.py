@@ -66,6 +66,12 @@ def test_retrieve_all_should_retrieve_trucks(repository: TruckRepository) -> Non
     assert truck in result
 
 
+def test_retrieve_all_should_empty_set(repository: TruckRepository) -> None:
+    result = repository.retrieve_all()
+
+    assert result == set()
+
+
 def test_retrieve_by_id_should_return_truck(repository: TruckRepository) -> None:
     truck = Truck(
         plate="AAA1111",
