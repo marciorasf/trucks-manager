@@ -38,8 +38,7 @@ def test_add_should_return_identifier(repository: TruckRepository) -> None:
     assert result == "1"
 
 
-def test_add_already_existent_truck_should_raise() -> None:
-    repository = TruckRepositoryInMemory()
+def test_add_already_existent_truck_should_raise(repository: TruckRepository) -> None:
     truck = Truck(
         plate="AAA1111",
         model_name="civic",
