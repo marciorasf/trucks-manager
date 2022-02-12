@@ -35,7 +35,7 @@ repos:
 
       - id: mypy
         name: Typecheck with mypy
-        entry: poetry run mypy .
+        entry: poetry run mypy truck_manager tests
         pass_filenames: false
         types: [python]
         language: system
